@@ -1,0 +1,19 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Create an EC2 instance with Apache HTTP server
+
+Resources:
+  EC2Instance:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      InstanceType: t2.micro
+      ImageId: ami-xxxxxxxxxxxxx # Replace with your desired Amazon Linux AMI ID
+      KeyName: MyKeyPair # Replace with your key pair name
+      SecurityGroups:
+        - MySecurityGroup # Replace with your security group name
+      UserData:
+        Fn::Base64: |
+          #!/bin/bash
+          yum update -y
+          yum install httpd -y
+          service httpd start
+          chkconfig httpd on
