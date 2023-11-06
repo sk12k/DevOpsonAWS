@@ -1,0 +1,22 @@
+##############################################
+## Add Parameters
+##############################################
+
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Create an EC2 instance with Parameters
+
+Parameters:
+  InstanceType:
+    Type: String
+    Default: t2.micro
+    Description: EC2 instance type
+
+Resources:
+  EC2Instance:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      InstanceType: !Ref InstanceType
+      ImageId: ami-xxxxxxxxxxxxx # Replace with your desired AMI ID
+      KeyName: MyKeyPair # Replace with your key pair name
+      SecurityGroups:
+        - MySecurityGroup # Replace with your security group name

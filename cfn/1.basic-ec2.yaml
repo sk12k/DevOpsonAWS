@@ -1,0 +1,16 @@
+##############################################
+## Basic EC2
+##############################################
+
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Create an EC2 instance with Parameters
+
+Resources:
+  EC2Instance:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      InstanceType: !Ref InstanceType
+      ImageId: ami-xxxxxxxxxxxxx # Replace with your desired AMI ID
+      KeyName: MyKeyPair # Replace with your key pair name
+      SecurityGroups:
+        - MySecurityGroup # Replace with your security group name
