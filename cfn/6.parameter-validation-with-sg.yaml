@@ -1,5 +1,12 @@
+##############################################
+## Output
+## User data
+## Parameter validation
+## Security Group
+##############################################
+
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Create an EC2 instance with Apache HTTP server
+Description: Create an EC2 instance with Apache HTTP server and a custom security group with open egress
 
 Parameters:
   InstanceType:
@@ -10,18 +17,36 @@ Parameters:
       - t2.micro
       - t3.micro
       - t3.medium
-  
+
     ConstraintDescription: Must be a valid instance type (t2.micro, t3.micro or t3.medium).
 
 Resources:
+  sgForCFNDemo:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: Security group with SSH, HTTP, and HTTPS ingress open and open egress
+      SecurityGroupIngress:
+        - CidrIp: 0.0.0.0/0
+          IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+        - CidrIp: 0.0.0.0/0
+          IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+        - CidrIp: 0.0.0.0/0
+          IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+      VpcId: vpc-efd78d86
+
   EC2Instance:
     Type: 'AWS::EC2::Instance'
     Properties:
       InstanceType: !Ref InstanceType
       ImageId: ami-0cf6f2b898ac0b337 # Amazon Linux 2023 AMI in London region
-      # KeyName: MyKeyPair # Replace with your key pair name
-      # SecurityGroups:
-      #   - MySecurityGroup # Replace with your security group name
+      SecurityGroups:
+        - !Ref sgForCFNDemo
       UserData:
         Fn::Base64: |
           #!/bin/bash

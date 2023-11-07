@@ -6,10 +6,10 @@ Resources:
     Type: 'AWS::EC2::Instance'
     Properties:
       InstanceType: t2.micro
-      ImageId: ami-xxxxxxxxxxxxx # Replace with your desired Amazon Linux AMI ID
-      KeyName: MyKeyPair # Replace with your key pair name
-      SecurityGroups:
-        - MySecurityGroup # Replace with your security group name
+      ImageId: ami-0cf6f2b898ac0b337 # Amazon Linux 2023 AMI in London region
+      # KeyName: MyKeyPair # Replace with your key pair name
+      # SecurityGroups:
+      #   - MySecurityGroup # Replace with your security group name
       UserData:
         Fn::Base64: |
           #!/bin/bash
