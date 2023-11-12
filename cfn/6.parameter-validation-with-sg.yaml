@@ -46,7 +46,7 @@ Resources:
       InstanceType: !Ref InstanceType
       ImageId: ami-0cf6f2b898ac0b337 # Amazon Linux 2023 AMI in London region
       SecurityGroups:
-        - !Ref sgForCFNDemo
+      - !Ref 'sgForCFNDemo'
       UserData:
         Fn::Base64: |
           #!/bin/bash
